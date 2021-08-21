@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
+import { useHistory } from "../../../node_modules/react-router-dom/cjs/react-router-dom.min";
 
 const Login = () => {
     
-    const [username, setUsername] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
     const user = {username : username, password : password}
 
@@ -11,18 +12,27 @@ const Login = () => {
 
         console.log(user)
 
-        fetch("http://localhost:99/authenticate",{
+        fetch("http://192.168.0.4:999/authenticate",{
             method : 'POST',
             headers : {
                 "content-type": "application/json"
             },
             body : JSON.stringify(user)
         })
-        .then( (response)=>response.json() )
+        .then( (response)=> {  
+            console.log(response);
+            response.json();
+         }   )
         .then((data)=>{
-            // console.log(JSON.parse(data))
+            console.log(data)
+
 
             localStorage.setItem("user", JSON.stringify(data))
+
+            if(data){
+                console.log("ok");
+                useHistory.push("/toDo");
+            }
         })
     }
 

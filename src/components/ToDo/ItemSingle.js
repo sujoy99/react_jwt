@@ -10,10 +10,11 @@ const ItemSingle = ({singleItem, deleteItem}) => {
 
             console.log(toDoItem);
 
-            fetch(`http://localhost:9999/api/v1/toDoItem/${toDoItem.id}`,{
+            fetch(`http://192.168.0.4:999/api/v1/toDoItem/${toDoItem.id}`,{
                 method : 'PUT',
                 headers : {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "Authorization": "Bearer "+ JSON.parse(localStorage.getItem("jwtToken"))
                 },
                 body : JSON.stringify(toDoItem)
             })

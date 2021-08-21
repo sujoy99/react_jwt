@@ -5,10 +5,13 @@ const ToDoItem = () => {
 
     const [toDoItems, setToDoItems] = useState(null)
     const [item, setItem] = useState(null)
+    const token = JSON.parse(localStorage.getItem("user"))
 
     useEffect(() => {
         
-        fetch("http://localhost:9999/api/v1/toDoItem")
+        fetch("http://192.168.0.4:999/api/v1/toDoItem", {
+                headers: {"Authorization": `Bearer ${token}`}
+            })
             .then( (response)=>response.json() )
             .then((data)=>{
                 console.log("ok", data)
@@ -25,7 +28,7 @@ const ToDoItem = () => {
         const newItem = {id : null, task : item, isDone: false}
 
 
-        fetch(`http://localhost:9999/api/v1/toDoItem`,{
+        fetch(`http://192.168.0.4:999/api/v1/toDoItem`,{
             method : 'POST',
             headers : {
                 "content-type": "application/json"
@@ -42,7 +45,7 @@ const ToDoItem = () => {
 
     const deleteItem = (id) => {
 
-        fetch(`http://localhost:9999/api/v1/toDoItem/${id}`,{
+        fetch(`http://192.168.0.4:999/api/v1/toDoItem/${id}`,{
             method : 'DELETE',
             headers : {
                 "content-type": "application/json"
