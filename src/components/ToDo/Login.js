@@ -12,17 +12,14 @@ const Login = () => {
 
         console.log(user)
 
-        fetch("http://192.168.0.4:999/authenticate",{
+        fetch("http://192.168.0.4:24/authenticate",{
             method : 'POST',
             headers : {
                 "content-type": "application/json"
             },
             body : JSON.stringify(user)
         })
-        .then( (response)=> {  
-            console.log(response);
-            response.json();
-         }   )
+        .then( (response)=> response.json())
         .then((data)=>{
             console.log(data)
 

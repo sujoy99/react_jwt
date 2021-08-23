@@ -9,7 +9,7 @@ const ToDoItem = () => {
 
     useEffect(() => {
         
-        fetch("http://192.168.0.4:999/api/v1/toDoItem", {
+        fetch("http://192.168.0.4:24/api/v1/toDoItem", {
                 headers: {"Authorization": `Bearer ${token}`}
             })
             .then( (response)=>response.json() )
@@ -28,7 +28,7 @@ const ToDoItem = () => {
         const newItem = {id : null, task : item, isDone: false}
 
 
-        fetch(`http://192.168.0.4:999/api/v1/toDoItem`,{
+        fetch(`http://192.168.0.4:24/api/v1/toDoItem`,{
             method : 'POST',
             headers : {
                 "content-type": "application/json"
@@ -45,7 +45,7 @@ const ToDoItem = () => {
 
     const deleteItem = (id) => {
 
-        fetch(`http://192.168.0.4:999/api/v1/toDoItem/${id}`,{
+        fetch(`http://192.168.0.4:24/api/v1/toDoItem/${id}`,{
             method : 'DELETE',
             headers : {
                 "content-type": "application/json"
