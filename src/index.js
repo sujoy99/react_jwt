@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import ToDoItem from "./components/ToDo/ToDoItem";
 
-import { Route, BrowserRouter as Router } from "../node_modules/react-router-dom";
+import {Route, BrowserRouter as Router  } from "../node_modules/react-router-dom";
 
 const myRouter = (
 

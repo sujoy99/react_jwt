@@ -1,16 +1,23 @@
 import React, {useState, useEffect} from 'react'
+import jwt from "../../../node_modules/jwt-decode";
 import ItemSingle from "./ItemSingle";
+
 
 const ToDoItem = () => {
 
     const [toDoItems, setToDoItems] = useState(null)
-    const [item, setItem] = useState(null)
+    const [item, setItem] = useState('')
     const token = JSON.parse(localStorage.getItem("user"))
 
-    useEffect(() => {
+    console.log("This is token", jwt(token['token']))
+    const token1 = jwt(token['token'])
+    const a = token1["sub"];
+    console.log("sub ", a);
+
+    useEffect(() => {                     
         
         fetch("http://192.168.0.4:24/api/v1/toDoItem", {
-                headers: {"Authorization": `Bearer ${token}`}
+                headers: {"Authorization": `Bearer ${token['token']}`}
             })
             .then( (response)=>response.json() )
             .then((data)=>{
@@ -64,13 +71,18 @@ const ToDoItem = () => {
 
     return (
         <>
+            
+            
+                    <div style = {{ visibility : a === 'admin' ? 'visible' : 'hidden'}}>
 
-            <div>
-
-            <input type="text" value={item} onChange={(e)=>{ setItem(e.target.value) }}/>
+            <input type="text" value={item} onChange={(e)=>{ setItem(e.target.value) }} />
                 <button onClick={ () => { addItem() }  }>Add</button>
             </div>
-
+                
+                
+            
+            
+            
 
             <div>
 
@@ -85,7 +97,7 @@ const ToDoItem = () => {
                     toDoItems.map( (curElem) => {
                         return (
                             <>
-                                <ItemSingle singleItem={curElem} key={curElem.id} deleteItem={deleteItem}/>
+                                <ItemSingle singleItem={curElem} key={curElem.id} deleteItem={deleteItem} a={a}/>
                                 
                             
                             </>

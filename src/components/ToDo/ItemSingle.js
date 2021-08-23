@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
-const ItemSingle = ({singleItem, deleteItem}) => {
+const ItemSingle = ({singleItem, deleteItem, a}) => {
+    const token = JSON.parse(localStorage.getItem("user"))
     const [toDoItem, setToDoItem] = useState(singleItem)
     const [isModified, setIsModified] = useState(false)
 
@@ -14,7 +15,7 @@ const ItemSingle = ({singleItem, deleteItem}) => {
                 method : 'PUT',
                 headers : {
                     "content-type": "application/json",
-                    "Authorization": "Bearer "+ JSON.parse(localStorage.getItem("jwtToken"))
+                    "Authorization": `Bearer ${token['token']}`
                 },
                 body : JSON.stringify(toDoItem)
             })
@@ -44,7 +45,7 @@ const ItemSingle = ({singleItem, deleteItem}) => {
                                 : ( <span>{toDoItem.task}</span> )
             }
             
-            <button style={{cursor : 'pointer'}} onClick={() => {deleteItem(toDoItem.id)} }>🚮</button>
+            <button style={{cursor : 'pointer'}, { visibility : a === 'admin' ? 'visible' : 'hidden'}} onClick={() => {deleteItem(toDoItem.id)} }>🚮</button>
 
             </div>
         </>

@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import { useHistory } from "../../../node_modules/react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
+
+    let history = useHistory();
     
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -28,7 +30,7 @@ const Login = () => {
 
             if(data){
                 console.log("ok");
-                useHistory.push("/toDo");
+                history.push("/toDo");
             }
         })
     }
